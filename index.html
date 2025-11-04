@@ -10,7 +10,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #00b9ff 0%, #064a70 100%);
       color: #1a202c;
       line-height: 1.6;
@@ -54,7 +54,7 @@
     }
 
     .logo {
-      height: 50px;
+      height: 70px;
       width: auto;
     }
 
@@ -215,24 +215,32 @@
     }
 
     .benefits-box h3 {
-      color: #ffffff;
+      color: #ffffff !important;
       margin-top: 0;
       font-size: 1.5em;
     }
 
     .benefits-box ul {
       margin: 16px 0 0 0;
+      list-style: none;
+      padding-left: 0;
     }
 
     .benefits-box li {
-      color: #ffffff;
+      color: #ffffff !important;
       font-size: 1.1em;
       margin: 14px 0;
       font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
-    .benefits-box li::marker {
-      color: #ffd700;
+    .benefit-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: #ffffff;
     }
 
     /* Process Comparison */
@@ -353,8 +361,8 @@
     }
 
     .layer.security {
-      background: linear-gradient(135deg, rgba(245, 101, 101, 0.1) 0%, rgba(197, 48, 48, 0.1) 100%);
-      border-left-color: #f56565;
+      background: linear-gradient(135deg, rgba(0, 185, 255, 0.1) 0%, rgba(6, 74, 112, 0.1) 100%);
+      border-left-color: #064a70;
     }
 
     .layer h4 {
@@ -414,7 +422,7 @@
     }
 
     .savings {
-      background: #48bb78;
+      background: #064a70;
       color: #ffffff;
       padding: 8px 12px;
       border-radius: 20px;
@@ -520,18 +528,151 @@
     }
 
     .cost-savings.baseline {
-      background: #e2e8f0;
-      color: #4a5568;
+      background: #064a70;
+      color: #ffffff;
     }
 
     .cost-savings.moderate {
-      background: #fbd38d;
-      color: #744210;
+      background: #00b9ff;
+      color: #ffffff;
     }
 
     .cost-savings.high {
-      background: #68d391;
-      color: #22543d;
+      background: #064a70;
+      color: #ffffff;
+    }
+
+    /* Cost Chart Styles */
+    .cost-chart {
+      background: #f8fafc;
+      padding: 24px;
+      border-radius: 12px;
+      margin: 24px 0;
+    }
+
+    .cost-chart h4 {
+      margin: 0 0 20px 0;
+      color: #064a70;
+      text-align: center;
+    }
+
+    .chart-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .chart-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .bar-label {
+      min-width: 120px;
+      font-weight: 600;
+      color: #064a70;
+      font-size: 0.9em;
+    }
+
+    .bar-visual {
+      flex: 1;
+      height: 40px;
+      background: #e2e8f0;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 8px;
+      transition: width 0.8s ease;
+      position: relative;
+    }
+
+    .bar-visual.manual .bar-fill {
+      background: linear-gradient(135deg, #064a70 0%, #00b9ff 100%);
+    }
+
+    .bar-visual.hybrid .bar-fill {
+      background: linear-gradient(135deg, #00b9ff 0%, #064a70 100%);
+    }
+
+    .bar-visual.ai .bar-fill {
+      background: linear-gradient(135deg, #064a70 0%, #00b9ff 100%);
+    }
+
+    .bar-value {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.9em;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    }
+
+    /* ROI Chart Styles */
+    .roi-chart {
+      background: #f8fafc;
+      padding: 24px;
+      border-radius: 12px;
+      margin: 24px 0;
+    }
+
+    .roi-chart h4 {
+      margin: 0 0 20px 0;
+      color: #064a70;
+      text-align: center;
+    }
+
+    .roi-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .timeline-year {
+      min-width: 80px;
+      font-weight: 600;
+      color: #064a70;
+      font-size: 0.9em;
+    }
+
+    .timeline-bar {
+      flex: 1;
+      height: 40px;
+      background: #e2e8f0;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .timeline-fill {
+      height: 100%;
+      background: linear-gradient(135deg, #00b9ff 0%, #064a70 100%);
+      border-radius: 8px;
+      transition: width 1s ease;
+      position: relative;
+    }
+
+    .timeline-value {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.9em;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
     }
 
     /* Compliance Grid */
@@ -598,6 +739,16 @@
       margin: 0 0 16px 0;
       color: #00b9ff;
       font-size: 1.2em;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .trend-icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      color: #00b9ff;
     }
 
     /* CTA Section */
@@ -612,13 +763,13 @@
     }
 
     .cta-content h3 {
-      color: #ffffff;
+      color: #ffffff !important;
       margin: 0 0 16px 0;
       font-size: 1.6em;
     }
 
     .cta-content p {
-      color: #ffffff;
+      color: #ffffff !important;
       margin: 0 0 32px 0;
       font-size: 1.1em;
       opacity: 0.9;
@@ -635,8 +786,18 @@
       background: rgba(255, 255, 255, 0.1);
       padding: 16px;
       border-radius: 8px;
-      color: #ffffff;
+      color: #ffffff !important;
       font-size: 1.05em;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .contact-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: #ffffff;
     }
 
     .cta-button-main {
@@ -950,11 +1111,26 @@
      <div class="benefits-box">
       <h3>Key Benefits</h3>
       <ul>
-       <li>Reduce verification time from days to minutes</li>
-       <li>Decrease fraud losses by up to 40%</li>
-       <li>Lower operational costs by 60%</li>
-       <li>Improve credit decisioning accuracy by 35%</li>
-       <li>Enhance customer satisfaction through faster processing</li>
+       <li>
+        <svg class="benefit-icon" viewbox="0 0 24 24" fill="currentColor">
+         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+        </svg>Reduce verification time from days to minutes</li>
+       <li>
+        <svg class="benefit-icon" viewbox="0 0 24 24" fill="currentColor">
+         <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
+        </svg>Decrease fraud losses by up to 40%</li>
+       <li>
+        <svg class="benefit-icon" viewbox="0 0 24 24" fill="currentColor">
+         <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z" />
+        </svg>Lower operational costs by 60%</li>
+       <li>
+        <svg class="benefit-icon" viewbox="0 0 24 24" fill="currentColor">
+         <path d="M9 11H7v6h2v-6zm4 0h-2v6h2v-6zm4 0h-2v6h2v-6zm2.5-9H18V0h-2v2H8V0H6v2H4.5C3.12 2 2 3.12 2 4.5v15C2 20.88 3.12 22 4.5 22h15c1.38 0 2.5-1.12 2.5-2.5v-15C22 3.12 20.88 2 19.5 2zm0 17h-15v-12h15v12z" />
+        </svg>Improve credit decisioning accuracy by 35%</li>
+       <li>
+        <svg class="benefit-icon" viewbox="0 0 24 24" fill="currentColor">
+         <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+        </svg>Enhance customer satisfaction through faster processing</li>
       </ul>
      </div>
     </section>
@@ -1216,6 +1392,35 @@
        </div>
       </div>
      </div>
+     <div class="roi-chart">
+      <h4>3-Year ROI Projection</h4>
+      <div class="roi-timeline">
+       <div class="timeline-item">
+        <div class="timeline-year">
+         Year 1
+        </div>
+        <div class="timeline-bar">
+         <div class="timeline-fill" style="width: 35%"></div><span class="timeline-value">$7.2M</span>
+        </div>
+       </div>
+       <div class="timeline-item">
+        <div class="timeline-year">
+         Year 2
+        </div>
+        <div class="timeline-bar">
+         <div class="timeline-fill" style="width: 70%"></div><span class="timeline-value">$14.8M</span>
+        </div>
+       </div>
+       <div class="timeline-item">
+        <div class="timeline-year">
+         Year 3
+        </div>
+        <div class="timeline-bar">
+         <div class="timeline-fill" style="width: 100%"></div><span class="timeline-value">$23.4M</span>
+        </div>
+       </div>
+      </div>
+     </div>
      <h3>Revenue Impact Breakdown</h3>
      <div class="revenue-breakdown">
       <div class="revenue-item"><span class="revenue-category">Operational Savings</span> <span class="revenue-amount">$5.25M–$5.64M</span>
@@ -1232,6 +1437,35 @@
       <div class="cost-item"><span class="cost-method">Hybrid Approach</span> <span class="cost-amount">$1.25M</span> <span class="cost-savings moderate">33% savings</span>
       </div>
       <div class="cost-item"><span class="cost-method">Full AI Agent</span> <span class="cost-amount">$250K</span> <span class="cost-savings high">87% savings</span>
+      </div>
+     </div>
+     <div class="cost-chart">
+      <h4>Cost Reduction Visualization</h4>
+      <div class="chart-container">
+       <div class="chart-bar">
+        <div class="bar-label">
+         Manual Process
+        </div>
+        <div class="bar-visual manual">
+         <div class="bar-fill" style="width: 100%"></div><span class="bar-value">$1.87M</span>
+        </div>
+       </div>
+       <div class="chart-bar">
+        <div class="bar-label">
+         Hybrid Approach
+        </div>
+        <div class="bar-visual hybrid">
+         <div class="bar-fill" style="width: 67%"></div><span class="bar-value">$1.25M</span>
+        </div>
+       </div>
+       <div class="chart-bar">
+        <div class="bar-label">
+         Full AI Agent
+        </div>
+        <div class="bar-visual ai">
+         <div class="bar-fill" style="width: 13%"></div><span class="bar-value">$250K</span>
+        </div>
+       </div>
       </div>
      </div>
     </section>
@@ -1281,15 +1515,24 @@
      <p>The landscape of AI-powered unemployment verification continues to evolve rapidly. Credit bureaus that position themselves at the forefront of these emerging technologies will maintain competitive advantages and unlock new revenue opportunities.</p>
      <div class="trends-grid">
       <div class="trend-card">
-       <h4>🔗 Blockchain Integration</h4>
+       <h4>
+        <svg class="trend-icon" viewbox="0 0 24 24" fill="currentColor">
+         <path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z" />
+        </svg>Blockchain Integration</h4>
        <p>Immutable verification records and cross-institutional data sharing through distributed ledger technology, enabling unprecedented transparency and fraud prevention.</p>
       </div>
       <div class="trend-card">
-       <h4>📊 AI-Powered Analytics &amp; Predictive Risk Models</h4>
+       <h4>
+        <svg class="trend-icon" viewbox="0 0 24 24" fill="currentColor">
+         <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" />
+        </svg>AI-Powered Analytics &amp; Predictive Risk Models</h4>
        <p>Advanced machine learning models that predict unemployment risk, default probability, and optimal credit terms based on employment patterns and economic indicators.</p>
       </div>
       <div class="trend-card">
-       <h4>💼 Gig Economy &amp; Alternative Income Verification</h4>
+       <h4>
+        <svg class="trend-icon" viewbox="0 0 24 24" fill="currentColor">
+         <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1z" />
+        </svg>Gig Economy &amp; Alternative Income Verification</h4>
        <p>Specialized verification systems for freelancers, contractors, rental income, and emerging income sources that traditional employment verification cannot address.</p>
       </div>
      </div>
@@ -1302,11 +1545,29 @@
        <h3>Ready to Transform Your Verification Process?</h3>
        <p>Contact Sails Software for tailored consultations and comprehensive platform solutions designed specifically for credit bureaus and financial institutions.</p><a href="https://share.hsforms.com/1tpZEdsZEQqW085sU9IfLKQtuyeq" target="_blank" rel="noopener noreferrer" class="cta-button-main">Schedule Your Consultation</a>
        <div class="contact-grid">
-        <div class="contact-item"><strong>📧 Email:</strong> contact@sailssoftware.com
+        <div class="contact-item">
+         <svg class="contact-icon" viewbox="0 0 24 24" fill="currentColor">
+          <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+         </svg>
+         <div>
+          <strong>Email:</strong> contact@sailssoftware.com
+         </div>
         </div>
-        <div class="contact-item"><strong>📞 Phone:</strong> +1-248-750-6252
+        <div class="contact-item">
+         <svg class="contact-icon" viewbox="0 0 24 24" fill="currentColor">
+          <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+         </svg>
+         <div>
+          <strong>Phone:</strong> +1-248-750-6252
+         </div>
         </div>
-        <div class="contact-item"><strong>🌐 Website:</strong> www.sailssoftware.com
+        <div class="contact-item">
+         <svg class="contact-icon" viewbox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+         </svg>
+         <div>
+          <strong>Website:</strong> www.sailssoftware.com
+         </div>
         </div>
        </div>
       </div>
@@ -1394,7 +1655,7 @@
       text_color: "#064a70",
       primary_action_color: "#00b9ff",
       secondary_text_color: "#4a5568",
-      font_family: "Inter",
+      font_family: "Poppins",
       font_size: 16
     };
 
@@ -1543,5 +1804,5 @@
       });
     });
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9991bad4f0799aa2',t:'MTc2MjIzNDMzNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99948ab8430a6ed1',t:'MTc2MjI2MzgyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
