@@ -1,0 +1,1547 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sails Software - AI Agents White Paper</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #00b9ff 0%, #064a70 100%);
+      color: #1a202c;
+      line-height: 1.6;
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-content {
+      padding: 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      height: 50px;
+      width: auto;
+    }
+
+    .title-section {
+      flex: 1;
+      text-align: center;
+      min-width: 300px;
+    }
+
+    .cta-section {
+      display: flex;
+      align-items: center;
+    }
+
+    .cta-button {
+      background: linear-gradient(135deg, #00b9ff 0%, #064a70 100%);
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95em;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 185, 255, 0.3);
+      border: none;
+      cursor: pointer;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 185, 255, 0.4);
+      background: linear-gradient(135deg, #0099cc 0%, #053a5a 100%);
+    }
+
+    h1 {
+      font-size: 2.2em;
+      font-weight: 800;
+      margin: 0 0 12px 0;
+      background: linear-gradient(135deg, #00b9ff 0%, #064a70 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 1em;
+      color: #4a5568;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    /* Navigation */
+    nav {
+      background: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      padding: 16px 0;
+      position: sticky;
+      top: 98px;
+      z-index: 99;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #4a5568;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      font-size: 0.9em;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover {
+      background: #00b9ff;
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    /* Main Content */
+    main {
+      background: #ffffff;
+      min-height: 100%;
+      padding: 40px 0 60px 0;
+    }
+
+    section {
+      margin-bottom: 48px;
+      scroll-margin-top: 180px;
+    }
+
+    h2 {
+      font-size: 1.8em;
+      font-weight: 700;
+      color: #064a70;
+      margin: 0 0 20px 0;
+      padding-bottom: 12px;
+      border-bottom: 3px solid #00b9ff;
+    }
+
+    h3 {
+      font-size: 1.4em;
+      font-weight: 600;
+      color: #064a70;
+      margin: 28px 0 16px 0;
+    }
+
+    h4 {
+      font-size: 1.15em;
+      font-weight: 600;
+      color: #4a5568;
+      margin: 20px 0 12px 0;
+    }
+
+    p {
+      margin: 0 0 16px 0;
+      color: #4a5568;
+      font-size: 1.05em;
+      line-height: 1.7;
+    }
+
+    /* Lists */
+    ul {
+      margin: 16px 0;
+      padding-left: 24px;
+    }
+
+    li {
+      margin: 10px 0;
+      color: #4a5568;
+      font-size: 1.05em;
+      line-height: 1.7;
+    }
+
+    li::marker {
+      color: #00b9ff;
+    }
+
+    /* Key Benefits Box */
+    .benefits-box {
+      background: linear-gradient(135deg, #00b9ff 0%, #064a70 100%);
+      color: #ffffff;
+      padding: 32px;
+      border-radius: 16px;
+      margin: 32px 0;
+      box-shadow: 0 10px 30px rgba(0, 185, 255, 0.3);
+    }
+
+    .benefits-box h3 {
+      color: #ffffff;
+      margin-top: 0;
+      font-size: 1.5em;
+    }
+
+    .benefits-box ul {
+      margin: 16px 0 0 0;
+    }
+
+    .benefits-box li {
+      color: #ffffff;
+      font-size: 1.1em;
+      margin: 14px 0;
+      font-weight: 500;
+    }
+
+    .benefits-box li::marker {
+      color: #ffd700;
+    }
+
+    /* Process Comparison */
+    .process-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin: 32px 0;
+    }
+
+    .process-card {
+      background: #f8fafc;
+      padding: 24px;
+      border-radius: 12px;
+      border: 2px solid #e2e8f0;
+    }
+
+    .process-card h4 {
+      margin-top: 0;
+      color: #064a70;
+      font-size: 1.25em;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #cbd5e0;
+    }
+
+    .process-card.ai {
+      background: linear-gradient(135deg, rgba(0, 185, 255, 0.1) 0%, rgba(6, 74, 112, 0.1) 100%);
+      border-color: #00b9ff;
+    }
+
+    .process-card.ai h4 {
+      color: #00b9ff;
+      border-bottom-color: #00b9ff;
+    }
+
+    .metric {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #e2e8f0;
+      font-weight: 600;
+    }
+
+    .metric:last-child {
+      border-bottom: none;
+    }
+
+    .metric-value {
+      color: #00b9ff;
+      font-weight: 700;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin: 32px 0;
+    }
+
+    .stat-card {
+      background: #f8fafc;
+      padding: 24px;
+      border-radius: 12px;
+      text-align: center;
+      border: 2px solid #e2e8f0;
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      border-color: #00b9ff;
+    }
+
+    .stat-number {
+      font-size: 2.2em;
+      font-weight: 800;
+      color: #00b9ff;
+      margin: 0 0 8px 0;
+    }
+
+    .stat-label {
+      font-size: 0.95em;
+      color: #4a5568;
+      font-weight: 600;
+    }
+
+    /* Architecture Section */
+    .architecture-section {
+      margin: 32px 0;
+    }
+
+    .architecture-layers {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .layer {
+      background: #f8fafc;
+      padding: 20px;
+      border-radius: 12px;
+      border-left: 4px solid #cbd5e0;
+      transition: all 0.3s ease;
+    }
+
+    .layer:hover {
+      transform: translateX(8px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .layer.primary {
+      background: linear-gradient(135deg, rgba(0, 185, 255, 0.1) 0%, rgba(6, 74, 112, 0.1) 100%);
+      border-left-color: #00b9ff;
+    }
+
+    .layer.security {
+      background: linear-gradient(135deg, rgba(245, 101, 101, 0.1) 0%, rgba(197, 48, 48, 0.1) 100%);
+      border-left-color: #f56565;
+    }
+
+    .layer h4 {
+      margin: 0 0 8px 0;
+      color: #064a70;
+    }
+
+    .layer p {
+      margin: 0;
+      font-size: 0.95em;
+      color: #4a5568;
+    }
+
+    /* Use Cases Grid */
+    .use-cases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 32px 0;
+    }
+
+    .use-case-card {
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 12px;
+      border: 2px solid #e2e8f0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .use-case-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      border-color: #00b9ff;
+    }
+
+    .use-case-card h4 {
+      margin: 0 0 16px 0;
+      color: #064a70;
+    }
+
+    .impact-metrics {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 16px 0;
+    }
+
+    .metric-highlight {
+      background: #00b9ff;
+      color: #ffffff;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85em;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .savings {
+      background: #48bb78;
+      color: #ffffff;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 0.9em;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    /* Implementation Approaches */
+    .implementation-approaches {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 32px 0;
+    }
+
+    .approach-card {
+      background: #f8fafc;
+      padding: 24px;
+      border-radius: 12px;
+      border: 2px solid #e2e8f0;
+      transition: all 0.3s ease;
+    }
+
+    .approach-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      border-color: #00b9ff;
+    }
+
+    .approach-card h4 {
+      margin: 0 0 12px 0;
+      color: #00b9ff;
+    }
+
+    /* ROI Analysis */
+    .roi-summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      margin: 32px 0;
+    }
+
+    .roi-metric {
+      background: linear-gradient(135deg, #00b9ff 0%, #064a70 100%);
+      color: #ffffff;
+      padding: 28px 20px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0, 185, 255, 0.3);
+    }
+
+    .roi-number {
+      font-size: 2.2em;
+      font-weight: 800;
+      margin: 0 0 8px 0;
+    }
+
+    .roi-label {
+      font-size: 1em;
+      font-weight: 600;
+      opacity: 0.9;
+    }
+
+    .revenue-breakdown, .cost-comparison {
+      background: #f8fafc;
+      padding: 24px;
+      border-radius: 12px;
+      margin: 24px 0;
+    }
+
+    .revenue-item, .cost-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #e2e8f0;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .revenue-item:last-child, .cost-item:last-child {
+      border-bottom: none;
+    }
+
+    .revenue-category, .cost-method {
+      font-weight: 600;
+      color: #064a70;
+    }
+
+    .revenue-amount, .cost-amount {
+      font-weight: 700;
+      color: #00b9ff;
+      font-size: 1.1em;
+    }
+
+    .cost-savings {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85em;
+      font-weight: 600;
+      margin-left: 12px;
+    }
+
+    .cost-savings.baseline {
+      background: #e2e8f0;
+      color: #4a5568;
+    }
+
+    .cost-savings.moderate {
+      background: #fbd38d;
+      color: #744210;
+    }
+
+    .cost-savings.high {
+      background: #68d391;
+      color: #22543d;
+    }
+
+    /* Compliance Grid */
+    .compliance-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin: 32px 0;
+    }
+
+    .compliance-card {
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 12px;
+      border: 2px solid #e2e8f0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .compliance-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      border-color: #00b9ff;
+    }
+
+    .compliance-card h4 {
+      margin: 0 0 16px 0;
+      color: #00b9ff;
+      font-size: 1.15em;
+    }
+
+    .compliance-card ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .compliance-card li {
+      margin: 8px 0;
+      font-size: 0.95em;
+    }
+
+    /* Future Trends */
+    .trends-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 32px 0;
+    }
+
+    .trend-card {
+      background: linear-gradient(135deg, rgba(0, 185, 255, 0.1) 0%, rgba(6, 74, 112, 0.1) 100%);
+      padding: 24px;
+      border-radius: 12px;
+      border: 2px solid #00b9ff;
+      transition: all 0.3s ease;
+    }
+
+    .trend-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 185, 255, 0.2);
+    }
+
+    .trend-card h4 {
+      margin: 0 0 16px 0;
+      color: #00b9ff;
+      font-size: 1.2em;
+    }
+
+    /* CTA Section */
+    .cta-section-main {
+      background: linear-gradient(135deg, #00b9ff 0%, #064a70 100%);
+      color: #ffffff;
+      padding: 40px 32px;
+      border-radius: 16px;
+      margin: 40px 0 32px 0;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(0, 185, 255, 0.3);
+    }
+
+    .cta-content h3 {
+      color: #ffffff;
+      margin: 0 0 16px 0;
+      font-size: 1.6em;
+    }
+
+    .cta-content p {
+      color: #ffffff;
+      margin: 0 0 32px 0;
+      font-size: 1.1em;
+      opacity: 0.9;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .contact-item {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 16px;
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 1.05em;
+    }
+
+    .cta-button-main {
+      background: #ffffff;
+      color: #064a70;
+      padding: 16px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1em;
+      transition: all 0.3s ease;
+      display: inline-block;
+      margin: 20px 0;
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+    }
+
+    .cta-button-main:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255, 255, 255, 0.4);
+      background: #f0f9ff;
+    }
+
+    .footer-note {
+      text-align: center;
+      padding: 24px 0;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 32px;
+    }
+
+    .footer-note p {
+      margin: 0;
+      color: #718096;
+      font-size: 0.9em;
+    }
+
+    /* Appendices */
+    .appendix-section {
+      margin: 40px 0;
+    }
+
+    .appendix-section h3 {
+      color: #00b9ff;
+      border-bottom: 2px solid #00b9ff;
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+    }
+
+    .spec-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      background: #f8fafc;
+      padding: 24px;
+      border-radius: 12px;
+    }
+
+    .spec-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #e2e8f0;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .spec-item:last-child {
+      border-bottom: none;
+    }
+
+    .spec-label {
+      font-weight: 600;
+      color: #064a70;
+    }
+
+    .spec-value {
+      font-weight: 700;
+      color: #00b9ff;
+    }
+
+    .system-overview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .overview-card {
+      background: #f8fafc;
+      padding: 24px;
+      border-radius: 12px;
+      border: 2px solid #e2e8f0;
+    }
+
+    .overview-card h4 {
+      margin: 0 0 16px 0;
+      color: #00b9ff;
+    }
+
+    .overview-card ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .overview-card li {
+      margin: 10px 0;
+    }
+
+    .glossary {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .glossary-item {
+      background: #f8fafc;
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid #00b9ff;
+    }
+
+    .glossary-item strong {
+      color: #00b9ff;
+      font-size: 1.05em;
+    }
+
+    /* Mobile Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 0;
+        gap: 16px;
+      }
+
+      .logo-section {
+        justify-content: center;
+      }
+
+      .title-section {
+        min-width: auto;
+      }
+
+      h1 {
+        font-size: 1.8em;
+      }
+
+      .subtitle {
+        font-size: 0.95em;
+      }
+
+      .process-comparison {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .nav-links {
+        gap: 8px;
+        padding: 0 8px;
+      }
+
+      .nav-links a {
+        font-size: 0.85em;
+        padding: 6px 12px;
+      }
+
+      nav {
+        top: 140px;
+      }
+
+      section {
+        scroll-margin-top: 200px;
+        margin-bottom: 36px;
+      }
+
+      h2 {
+        font-size: 1.6em;
+      }
+
+      h3 {
+        font-size: 1.3em;
+      }
+
+      .use-cases-grid, 
+      .implementation-approaches, 
+      .compliance-grid, 
+      .trends-grid, 
+      .system-overview,
+      .stats-grid,
+      .roi-summary,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .architecture-layers {
+        gap: 12px;
+      }
+
+      .layer:hover, 
+      .trend-card:hover {
+        transform: none;
+      }
+
+      .cta-section-main {
+        padding: 32px 20px;
+      }
+
+      .cta-content h3 {
+        font-size: 1.4em;
+      }
+
+      .spec-item,
+      .revenue-item,
+      .cost-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .cost-savings {
+        margin-left: 0;
+        margin-top: 4px;
+      }
+
+      .benefits-box {
+        padding: 24px;
+      }
+
+      .roi-metric {
+        padding: 24px 16px;
+      }
+
+      .roi-number {
+        font-size: 2em;
+      }
+
+      .stat-number {
+        font-size: 2em;
+      }
+
+      main {
+        padding: 32px 0 48px 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 12px;
+      }
+
+      h1 {
+        font-size: 1.6em;
+      }
+
+      .nav-links a {
+        font-size: 0.8em;
+        padding: 5px 10px;
+      }
+
+      .benefits-box,
+      .process-card,
+      .use-case-card,
+      .approach-card,
+      .compliance-card,
+      .trend-card {
+        padding: 20px;
+      }
+
+      .cta-section-main {
+        padding: 24px 16px;
+      }
+
+      .logo {
+        height: 40px;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <header>
+   <div class="container">
+    <div class="header-content">
+     <div class="logo-section"><img src="https://50153138.fs1.hubspotusercontent-na1.net/hubfs/50153138/Sails/Sails/logo-1-1.png?width=860&amp;t=" alt="Sails Software Logo" class="logo" onerror="this.style.display='none';">
+     </div>
+     <div class="title-section">
+      <h1 id="main-title">AI Agents in Unemployment Claims</h1>
+      <p class="subtitle" id="subtitle">Transforming Verification and Risk Assessment for Credit Bureaus</p>
+     </div>
+     <div class="cta-section"><a href="https://share.hsforms.com/1tpZEdsZEQqW085sU9IfLKQtuyeq" target="_blank" rel="noopener noreferrer" class="cta-button">Get Started</a>
+     </div>
+    </div>
+   </div>
+  </header>
+  <nav>
+   <div class="container">
+    <ul class="nav-links"><a href="#executive-summary">Executive Summary</a> <a href="#challenge">The Challenge</a> <a href="#solution">AI Solution</a> <a href="#use-cases">Use Cases</a> <a href="#implementation">Implementation</a> <a href="#roi-analysis">ROI Analysis</a> <a href="#compliance">Compliance</a> <a href="#future-trends">Future Trends</a> <a href="#conclusion">Conclusion</a> <a href="#appendices">Appendices</a>
+    </ul>
+   </div>
+  </nav>
+  <main>
+   <div class="container">
+    <section id="executive-summary">
+     <h2 id="executive-summary-title">Executive Summary</h2>
+     <p>The unemployment claims landscape presents critical challenges for credit bureaus seeking to verify income, assess creditworthiness, and mitigate fraud risk. Traditional verification methods are slow, costly, and increasingly vulnerable to sophisticated fraud schemes. AI agents offer a transformative solution by automating verification processes, detecting fraud patterns in real-time, and enabling faster, more accurate credit decisions. This white paper explores how AI agents can revolutionize unemployment claims processing for credit bureaus, delivering measurable improvements in operational efficiency, fraud detection, and customer experience while ensuring compliance with regulatory requirements.</p>
+     <div class="benefits-box">
+      <h3>Key Benefits</h3>
+      <ul>
+       <li>Reduce verification time from days to minutes</li>
+       <li>Decrease fraud losses by up to 40%</li>
+       <li>Lower operational costs by 60%</li>
+       <li>Improve credit decisioning accuracy by 35%</li>
+       <li>Enhance customer satisfaction through faster processing</li>
+      </ul>
+     </div>
+    </section>
+    <section id="challenge">
+     <h2 id="challenge-title">The Challenge: Current State of Unemployment Verification</h2>
+     <h3 id="verification">The Broken Verification Process</h3>
+     <p>Credit bureaus face significant obstacles in verifying unemployment income during credit applications, collections activities, and portfolio risk assessments. The current manual process involves multiple pain points that directly impact business outcomes.</p>
+     <ul>
+      <li><strong>Time Delays:</strong> Verification can take 5-10 business days, delaying credit decisions and frustrating applicants</li>
+      <li><strong>High Error Rates:</strong> Manual data entry results in 15-20% error rates in income verification</li>
+      <li><strong>Fragmented Systems:</strong> 53 different state unemployment systems with varying data formats and access protocols</li>
+      <li><strong>Labor Intensive:</strong> Each verification requires 30-45 minutes of staff time</li>
+      <li><strong>Limited Fraud Detection:</strong> Manual review catches only 35% of fraudulent unemployment claims</li>
+     </ul>
+     <div class="process-comparison">
+      <div class="process-card">
+       <h4>Manual Process</h4>
+       <ul>
+        <li>Application Received</li>
+        <li>Queue for Review (2-3 days)</li>
+        <li>Manual Data Entry (30 min)</li>
+        <li>Call State Agency (1-2 days)</li>
+        <li>Document Review (45 min)</li>
+        <li>Supervisor Approval (1 day)</li>
+        <li>Final Decision (5-10 days)</li>
+       </ul>
+       <div class="metric"><span>Cost/Verification:</span> <span class="metric-value">$18.75</span>
+       </div>
+       <div class="metric"><span>Error Rate:</span> <span class="metric-value">15-20%</span>
+       </div>
+       <div class="metric"><span>Fraud Detection:</span> <span class="metric-value">35%</span>
+       </div>
+      </div>
+      <div class="process-card ai">
+       <h4>AI Agent Process</h4>
+       <ul>
+        <li>Application Received</li>
+        <li>Instant AI Analysis (&lt;30 sec)</li>
+        <li>Automated Data Extraction</li>
+        <li>API Query to State Systems</li>
+        <li>Cross-Reference Validation</li>
+        <li>Fraud Pattern Detection</li>
+        <li>Decision Ready (&lt;5 min)</li>
+       </ul>
+       <div class="metric"><span>Cost/Verification:</span> <span class="metric-value">$2.50</span>
+       </div>
+       <div class="metric"><span>Error Rate:</span> <span class="metric-value">&lt;2%</span>
+       </div>
+       <div class="metric"><span>Fraud Detection:</span> <span class="metric-value">95%</span>
+       </div>
+      </div>
+     </div>
+     <h3 id="fraud">The Fraud Crisis</h3>
+     <div class="stats-grid">
+      <div class="stat-card">
+       <div class="stat-number">
+        $45B+
+       </div>
+       <div class="stat-label">
+        Fraudulent Claims (2020-2021)
+       </div>
+      </div>
+      <div class="stat-card">
+       <div class="stat-number">
+        18%
+       </div>
+       <div class="stat-label">
+        Claims Flagged as Fraudulent
+       </div>
+      </div>
+      <div class="stat-card">
+       <div class="stat-number">
+        65%
+       </div>
+       <div class="stat-label">
+        Identity Theft Cases
+       </div>
+      </div>
+     </div>
+     <h4>Common Fraud Patterns</h4>
+     <ul>
+      <li>Synthetic identity fraud using stolen PII combined with fabricated information</li>
+      <li>Interstate fraud rings filing claims across multiple states simultaneously</li>
+      <li>Employer impersonation with falsified wage records</li>
+      <li>Benefits continuation fraud by employed individuals</li>
+     </ul>
+     <h3 id="impact">Business Impact on Credit Bureaus</h3>
+     <ul>
+      <li><strong>Delayed Credit Decisions:</strong> Slower turnaround times reduce conversion rates and customer satisfaction</li>
+      <li><strong>Increased Default Risk:</strong> True income status leads to higher credit losses</li>
+      <li><strong>Operational Costs:</strong> Manual verification teams require significant overhead</li>
+      <li><strong>Compliance Risk:</strong> Inadequate verification processes may violate FCRA requirements</li>
+      <li><strong>Competitive Disadvantage:</strong> Bureaus with faster, more accurate verification gain market share</li>
+     </ul>
+    </section>
+    <section id="solution">
+     <h2>The Solution: AI Agents for Unemployment Claims Processing</h2>
+     <h3>What Are AI Agents?</h3>
+     <p>AI agents represent the next evolution in automated processing, combining multiple advanced technologies to create intelligent systems that can reason, learn, and adapt. Unlike traditional rule-based systems, AI agents can handle complex, multi-step processes with human-like reasoning capabilities.</p>
+     <ul>
+      <li><strong>Adaptive Learning:</strong> Continuously improve performance based on new data and outcomes</li>
+      <li><strong>Multi-step Reasoning:</strong> Break complex tasks into logical sequences</li>
+      <li><strong>Context Awareness:</strong> Understand nuances and exceptions in data patterns</li>
+      <li><strong>Natural Language Processing:</strong> Extract and interpret unstructured data from documents</li>
+      <li><strong>Anomaly Detection:</strong> Identify suspicious patterns that deviate from normal behavior</li>
+     </ul>
+     <h3>How AI Agents Transform Unemployment Verification</h3>
+     <h4>Automated Data Collection &amp; Validation</h4>
+     <ul>
+      <li>Connect to state unemployment databases via API integrations</li>
+      <li>Extract data from submitted documents using advanced OCR and NLP</li>
+      <li>Cross-reference with employer databases and wage records</li>
+      <li>Validate identity information against multiple authoritative sources</li>
+     </ul>
+     <h4>Intelligent Analysis &amp; Cross-Referencing</h4>
+     <ul>
+      <li>Compare claimant information across disparate data sources</li>
+      <li>Identify discrepancies in dates, amounts, or eligibility criteria</li>
+      <li>Calculate benefit amounts and verify payment schedules</li>
+      <li>Flag inconsistencies for human review with detailed explanations</li>
+     </ul>
+     <h4>Advanced Fraud Detection</h4>
+     <ul>
+      <li>Analyze patterns across thousands of claims to detect anomalies</li>
+      <li>Identify synthetic identities through cross-system correlation</li>
+      <li>Detect interstate fraud schemes and coordinated attacks</li>
+      <li>Provide real-time decision support with comprehensive audit trails</li>
+      <li>Route high-risk cases to specialist review teams automatically</li>
+     </ul>
+     <div class="architecture-section">
+      <h3>Technical Architecture</h3>
+      <div class="architecture-layers">
+       <div class="layer">
+        <h4>User Interface Layer</h4>
+        <p>Dashboard • Case Management • Analytics Reporting</p>
+       </div>
+       <div class="layer">
+        <h4>Business Logic Layer</h4>
+        <p>Verification Rules • Risk Scoring Models • Compliance Checking</p>
+       </div>
+       <div class="layer primary">
+        <h4>AI Processing Layer</h4>
+        <p>Machine Learning • Fraud Detection • NLP • Pattern Recognition • Anomaly Detection</p>
+       </div>
+       <div class="layer">
+        <h4>Data Integration Layer</h4>
+        <p>State Systems (50+ APIs) • Document OCR Scanner • Credit Bureau Database</p>
+       </div>
+       <div class="layer security">
+        <h4>Security &amp; Compliance Layer</h4>
+        <p>Encryption • Audit Logs • Access Control • Tokenization</p>
+       </div>
+      </div>
+     </div>
+    </section>
+    <section id="use-cases">
+     <h2>Use Cases &amp; Business Impact</h2>
+     <div class="use-cases-grid">
+      <div class="use-case-card">
+       <h4>Application Verification</h4>
+       <div class="impact-metrics"><span class="metric-highlight">95% faster processing</span> <span class="metric-highlight">+60% fraud detection</span> <span class="savings">$1.2M/yr savings</span>
+       </div>
+       <p>Instant verification of unemployment claims during credit applications, reducing approval time from days to minutes.</p>
+      </div>
+      <div class="use-case-card">
+       <h4>Fraud Prevention</h4>
+       <div class="impact-metrics"><span class="metric-highlight">+125% detection rate</span> <span class="savings">$4.2M/yr savings</span>
+       </div>
+       <p>Advanced pattern recognition identifies sophisticated fraud schemes that manual processes miss.</p>
+      </div>
+      <div class="use-case-card">
+       <h4>Collections Strategy</h4>
+       <div class="impact-metrics"><span class="metric-highlight">+45% accuracy</span> <span class="savings">$850K/yr savings</span>
+       </div>
+       <p>Real-time income verification enables more effective collection strategies and payment arrangements.</p>
+      </div>
+      <div class="use-case-card">
+       <h4>Portfolio Risk Assessment</h4>
+       <div class="impact-metrics"><span class="metric-highlight">Real-time monitoring</span> <span class="savings">$650K/yr savings</span>
+       </div>
+       <p>Continuous monitoring of unemployment status changes across entire credit portfolios.</p>
+      </div>
+      <div class="use-case-card">
+       <h4>Regulatory Compliance</h4>
+       <div class="impact-metrics"><span class="metric-highlight">92% reduction in manual work</span> <span class="savings">$500K/yr savings</span>
+       </div>
+       <p>Automated compliance checking and audit trail generation for regulatory requirements.</p>
+      </div>
+     </div>
+    </section>
+    <section id="implementation">
+     <h2>Implementation Strategy</h2>
+     <div class="implementation-approaches">
+      <div class="approach-card">
+       <h4>Pilot-First Approach</h4>
+       <p><strong>Timeline:</strong> 3-6 months pilot, 12-18 months full deployment</p>
+       <p><strong>Risk:</strong> Low • <strong>Investment:</strong> Moderate • <strong>ROI Timeline:</strong> 8-12 months</p>
+       <ul>
+        <li>Start with single state or product line</li>
+        <li>Validate performance before scaling</li>
+        <li>Minimize organizational disruption</li>
+       </ul>
+      </div>
+      <div class="approach-card">
+       <h4>Aggressive Rollout</h4>
+       <p><strong>Timeline:</strong> 6-9 months full deployment</p>
+       <p><strong>Risk:</strong> Medium • <strong>Investment:</strong> High • <strong>ROI Timeline:</strong> 4-6 months</p>
+       <ul>
+        <li>Immediate competitive advantage</li>
+        <li>Faster return on investment</li>
+        <li>Requires significant change management</li>
+       </ul>
+      </div>
+      <div class="approach-card">
+       <h4>Hybrid Integration</h4>
+       <p><strong>Timeline:</strong> 6-12 months phased deployment</p>
+       <p><strong>Risk:</strong> Low-Medium • <strong>Investment:</strong> Moderate • <strong>ROI Timeline:</strong> 6-9 months</p>
+       <ul>
+        <li>AI handles routine cases, humans handle exceptions</li>
+        <li>Gradual staff transition and training</li>
+        <li>Maintains quality control during transition</li>
+       </ul>
+      </div>
+     </div>
+     <h3>Key Implementation Considerations</h3>
+     <ul>
+      <li><strong>Build vs. Buy vs. Partner:</strong> Evaluate internal capabilities against market solutions and strategic partnerships</li>
+      <li><strong>Legacy System Integration:</strong> Seamless integration with existing credit bureau infrastructure and workflows</li>
+      <li><strong>State API Connections:</strong> Establish secure connections to 50+ state unemployment systems with varying protocols</li>
+      <li><strong>Change Management:</strong> Comprehensive training programs and workflow redesign for verification staff</li>
+      <li><strong>Data Governance:</strong> Establish clear policies for data handling, retention, and privacy compliance</li>
+     </ul>
+    </section>
+    <section id="roi-analysis">
+     <h2>Return on Investment Analysis</h2>
+     <div class="roi-summary">
+      <div class="roi-metric">
+       <div class="roi-number">
+        1,200-1,400%
+       </div>
+       <div class="roi-label">
+        3-Year ROI
+       </div>
+      </div>
+      <div class="roi-metric">
+       <div class="roi-number">
+        $21M-$23.4M
+       </div>
+       <div class="roi-label">
+        Total Returns
+       </div>
+      </div>
+      <div class="roi-metric">
+       <div class="roi-number">
+        4-6 months
+       </div>
+       <div class="roi-label">
+        Payback Period
+       </div>
+      </div>
+     </div>
+     <h3>Revenue Impact Breakdown</h3>
+     <div class="revenue-breakdown">
+      <div class="revenue-item"><span class="revenue-category">Operational Savings</span> <span class="revenue-amount">$5.25M–$5.64M</span>
+      </div>
+      <div class="revenue-item"><span class="revenue-category">Fraud Loss Avoidance</span> <span class="revenue-amount">$12.75M</span>
+      </div>
+      <div class="revenue-item"><span class="revenue-category">Revenue Growth</span> <span class="revenue-amount">$3M–$5M</span>
+      </div>
+     </div>
+     <h3>Annual Cost Comparison (100K Verifications)</h3>
+     <div class="cost-comparison">
+      <div class="cost-item"><span class="cost-method">Manual Process</span> <span class="cost-amount">$1.87M</span> <span class="cost-savings baseline">Baseline</span>
+      </div>
+      <div class="cost-item"><span class="cost-method">Hybrid Approach</span> <span class="cost-amount">$1.25M</span> <span class="cost-savings moderate">33% savings</span>
+      </div>
+      <div class="cost-item"><span class="cost-method">Full AI Agent</span> <span class="cost-amount">$250K</span> <span class="cost-savings high">87% savings</span>
+      </div>
+     </div>
+    </section>
+    <section id="compliance">
+     <h2>Risk Mitigation &amp; Compliance</h2>
+     <div class="compliance-grid">
+      <div class="compliance-card">
+       <h4>Data Security</h4>
+       <ul>
+        <li>End-to-end encryption for all data transmission</li>
+        <li>SOC 2 Type II compliance certification</li>
+        <li>ISO 27001 information security standards</li>
+        <li>Multi-factor authentication and role-based access</li>
+       </ul>
+      </div>
+      <div class="compliance-card">
+       <h4>Regulatory Compliance</h4>
+       <ul>
+        <li>FCRA compliance for credit reporting activities</li>
+        <li>State-specific unemployment law adherence</li>
+        <li>GDPR and CCPA privacy regulation compliance</li>
+        <li>Automated audit trails for all decisions</li>
+       </ul>
+      </div>
+      <div class="compliance-card">
+       <h4>Algorithmic Fairness</h4>
+       <ul>
+        <li>Regular bias testing and fairness audits</li>
+        <li>Transparent decision-making processes</li>
+        <li>Human-in-the-loop for high-stakes decisions</li>
+        <li>Continuous monitoring for discriminatory patterns</li>
+       </ul>
+      </div>
+      <div class="compliance-card">
+       <h4>Operational Risk</h4>
+       <ul>
+        <li>Redundant system architecture for 99.9% uptime</li>
+        <li>Disaster recovery and business continuity plans</li>
+        <li>Gradual rollout to minimize operational disruption</li>
+        <li>Comprehensive staff training and change management</li>
+       </ul>
+      </div>
+     </div>
+    </section>
+    <section id="future-trends">
+     <h2>Future Trends</h2>
+     <p>The landscape of AI-powered unemployment verification continues to evolve rapidly. Credit bureaus that position themselves at the forefront of these emerging technologies will maintain competitive advantages and unlock new revenue opportunities.</p>
+     <div class="trends-grid">
+      <div class="trend-card">
+       <h4>🔗 Blockchain Integration</h4>
+       <p>Immutable verification records and cross-institutional data sharing through distributed ledger technology, enabling unprecedented transparency and fraud prevention.</p>
+      </div>
+      <div class="trend-card">
+       <h4>📊 AI-Powered Analytics &amp; Predictive Risk Models</h4>
+       <p>Advanced machine learning models that predict unemployment risk, default probability, and optimal credit terms based on employment patterns and economic indicators.</p>
+      </div>
+      <div class="trend-card">
+       <h4>💼 Gig Economy &amp; Alternative Income Verification</h4>
+       <p>Specialized verification systems for freelancers, contractors, rental income, and emerging income sources that traditional employment verification cannot address.</p>
+      </div>
+     </div>
+    </section>
+    <section id="conclusion">
+     <h2>Conclusion &amp; Next Steps</h2>
+     <p>The transformation of unemployment claims processing through AI agents represents a critical competitive opportunity for credit bureaus. Organizations that act decisively to implement these technologies will realize substantial operational efficiencies, fraud reduction, and revenue growth while those that delay risk falling behind in an increasingly competitive marketplace.</p>
+     <div class="cta-section-main">
+      <div class="cta-content">
+       <h3>Ready to Transform Your Verification Process?</h3>
+       <p>Contact Sails Software for tailored consultations and comprehensive platform solutions designed specifically for credit bureaus and financial institutions.</p><a href="https://share.hsforms.com/1tpZEdsZEQqW085sU9IfLKQtuyeq" target="_blank" rel="noopener noreferrer" class="cta-button-main">Schedule Your Consultation</a>
+       <div class="contact-grid">
+        <div class="contact-item"><strong>📧 Email:</strong> contact@sailssoftware.com
+        </div>
+        <div class="contact-item"><strong>📞 Phone:</strong> +1-248-750-6252
+        </div>
+        <div class="contact-item"><strong>🌐 Website:</strong> www.sailssoftware.com
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="footer-note">
+      <p>© 2025 Sails Software Inc. All Rights Reserved.</p>
+     </div>
+    </section>
+    <section id="appendices">
+     <h2>Appendices</h2>
+     <div class="appendix-section">
+      <h3>Appendix A: Technical Specifications</h3>
+      <div class="spec-grid">
+       <div class="spec-item"><span class="spec-label">API Architecture:</span> <span class="spec-value">RESTful APIs with OAuth 2.0 authentication</span>
+       </div>
+       <div class="spec-item"><span class="spec-label">Data Format:</span> <span class="spec-value">JSON standard data format</span>
+       </div>
+       <div class="spec-item"><span class="spec-label">Response Time:</span> <span class="spec-value">Sub-2 second API response times</span>
+       </div>
+       <div class="spec-item"><span class="spec-label">Verification Speed:</span> <span class="spec-value">Sub-5 minute complete verification</span>
+       </div>
+       <div class="spec-item"><span class="spec-label">System Uptime:</span> <span class="spec-value">99.9% system uptime guarantee</span>
+       </div>
+       <div class="spec-item"><span class="spec-label">Fraud Detection:</span> <span class="spec-value">Accuracy &gt;95%</span>
+       </div>
+       <div class="spec-item"><span class="spec-label">False Positives:</span> <span class="spec-value">Rate &lt;5%</span>
+       </div>
+       <div class="spec-item"><span class="spec-label">Support:</span> <span class="spec-value">24/7 monitoring and support</span>
+       </div>
+      </div>
+     </div>
+     <div class="appendix-section">
+      <h3>Appendix B: State Unemployment System Overview</h3>
+      <div class="system-overview">
+       <div class="overview-card">
+        <h4>System Landscape</h4>
+        <ul>
+         <li><strong>53 US Unemployment Systems</strong> across all states and territories</li>
+         <li><strong>Data formats:</strong> XML, JSON, CSV, proprietary formats</li>
+         <li><strong>Eligibility criteria:</strong> State-specific requirements and calculations</li>
+        </ul>
+       </div>
+       <div class="overview-card">
+        <h4>Technical Infrastructure</h4>
+        <ul>
+         <li><strong>Technology standards:</strong> Legacy mainframes to modern cloud systems</li>
+         <li><strong>Access protocols:</strong> SOAP, REST, FTP, batch processing</li>
+         <li><strong>Integration complexity:</strong> Varies significantly by state</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+     <div class="appendix-section">
+      <h3>Appendix C: Glossary of Terms</h3>
+      <div class="glossary">
+       <div class="glossary-item"><strong>AI Agent:</strong> Autonomous software system capable of making decisions and taking actions without human intervention
+       </div>
+       <div class="glossary-item"><strong>FCRA:</strong> Fair Credit Reporting Act – Federal law regulating credit reporting and consumer rights
+       </div>
+       <div class="glossary-item"><strong>Synthetic Identity:</strong> Fraudulent identity created using combination of real and fabricated personal details
+       </div>
+       <div class="glossary-item"><strong>OCR:</strong> Optical Character Recognition – Technology for converting images to machine-readable text
+       </div>
+       <div class="glossary-item"><strong>NLP:</strong> Natural Language Processing – AI technology for understanding human language
+       </div>
+       <div class="glossary-item"><strong>API:</strong> Application Programming Interface – Software interface for system communication
+       </div>
+       <div class="glossary-item"><strong>KYC:</strong> Know Your Customer – Identity verification and due diligence processes
+       </div>
+       <div class="glossary-item"><strong>ECOA:</strong> Equal Credit Opportunity Act – Federal law prohibiting credit discrimination
+       </div>
+      </div>
+     </div>
+    </section>
+   </div>
+  </main>
+  <script>
+    const defaultConfig = {
+      main_title: "AI Agents in Unemployment Claims",
+      subtitle: "Transforming Verification and Risk Assessment for Credit Bureaus",
+      executive_summary_title: "Executive Summary",
+      challenge_title: "The Challenge: Current State of Unemployment Verification",
+      background_color: "#00b9ff",
+      surface_color: "#ffffff",
+      text_color: "#064a70",
+      primary_action_color: "#00b9ff",
+      secondary_text_color: "#4a5568",
+      font_family: "Inter",
+      font_size: 16
+    };
+
+    const element = {
+      defaultConfig,
+      onConfigChange: async (config) => {
+        const customFont = config.font_family || defaultConfig.font_family;
+        const baseFontStack = '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+        const baseSize = config.font_size || defaultConfig.font_size;
+
+        document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        document.body.style.fontSize = `${baseSize}px`;
+
+        const backgroundColor = config.background_color || defaultConfig.background_color;
+        const surfaceColor = config.surface_color || defaultConfig.surface_color;
+        const textColor = config.text_color || defaultConfig.text_color;
+        const primaryActionColor = config.primary_action_color || defaultConfig.primary_action_color;
+        const secondaryTextColor = config.secondary_text_color || defaultConfig.secondary_text_color;
+
+        document.body.style.background = `linear-gradient(135deg, ${backgroundColor} 0%, #064a70 100%)`;
+        
+        document.querySelectorAll('header, nav, main, .process-card').forEach(el => {
+          el.style.background = surfaceColor;
+        });
+
+        document.querySelectorAll('h2, h3, .layer h4').forEach(el => {
+          el.style.color = textColor;
+        });
+
+        document.querySelectorAll('h1').forEach(el => {
+          el.style.background = `linear-gradient(135deg, ${primaryActionColor} 0%, #064a70 100%)`;
+          el.style.webkitBackgroundClip = 'text';
+          el.style.webkitTextFillColor = 'transparent';
+          el.style.backgroundClip = 'text';
+        });
+
+        document.querySelectorAll('p, li, .subtitle').forEach(el => {
+          el.style.color = secondaryTextColor;
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(el => {
+          el.addEventListener('mouseenter', () => {
+            el.style.background = primaryActionColor;
+            el.style.color = surfaceColor;
+          });
+          el.addEventListener('mouseleave', () => {
+            el.style.background = 'transparent';
+            el.style.color = secondaryTextColor;
+          });
+        });
+
+        document.querySelectorAll('h2').forEach(el => {
+          el.style.borderBottomColor = primaryActionColor;
+        });
+
+        document.querySelectorAll('.stat-number, .metric-value, .spec-value, .revenue-amount, .cost-amount').forEach(el => {
+          el.style.color = primaryActionColor;
+        });
+
+        document.getElementById('main-title').textContent = config.main_title || defaultConfig.main_title;
+        document.getElementById('subtitle').textContent = config.subtitle || defaultConfig.subtitle;
+        document.getElementById('executive-summary-title').textContent = config.executive_summary_title || defaultConfig.executive_summary_title;
+        document.getElementById('challenge-title').textContent = config.challenge_title || defaultConfig.challenge_title;
+
+        document.querySelector('h1').style.fontSize = `${baseSize * 2.2}px`;
+        document.querySelectorAll('h2').forEach(el => el.style.fontSize = `${baseSize * 1.8}px`);
+        document.querySelectorAll('h3').forEach(el => el.style.fontSize = `${baseSize * 1.4}px`);
+        document.querySelectorAll('h4').forEach(el => el.style.fontSize = `${baseSize * 1.15}px`);
+        document.querySelectorAll('p, li').forEach(el => el.style.fontSize = `${baseSize * 1.05}px`);
+        document.querySelectorAll('.stat-number, .roi-number').forEach(el => el.style.fontSize = `${baseSize * 2.2}px`);
+      },
+      mapToCapabilities: (config) => ({
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.surface_color || defaultConfig.surface_color,
+            set: (value) => {
+              config.surface_color = value;
+              window.elementSdk.setConfig({ surface_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              window.elementSdk.setConfig({ text_color: value });
+            }
+          },
+          {
+            get: () => config.primary_action_color || defaultConfig.primary_action_color,
+            set: (value) => {
+              config.primary_action_color = value;
+              window.elementSdk.setConfig({ primary_action_color: value });
+            }
+          },
+          {
+            get: () => config.secondary_text_color || defaultConfig.secondary_text_color,
+            set: (value) => {
+              config.secondary_text_color = value;
+              window.elementSdk.setConfig({ secondary_text_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => {
+            config.font_family = value;
+            window.elementSdk.setConfig({ font_family: value });
+          }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (value) => {
+            config.font_size = value;
+            window.elementSdk.setConfig({ font_size: value });
+          }
+        }
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ["main_title", config.main_title || defaultConfig.main_title],
+        ["subtitle", config.subtitle || defaultConfig.subtitle],
+        ["executive_summary_title", config.executive_summary_title || defaultConfig.executive_summary_title],
+        ["challenge_title", config.challenge_title || defaultConfig.challenge_title]
+      ])
+    };
+
+    if (window.elementSdk) {
+      window.elementSdk.init(element);
+    }
+
+    document.querySelectorAll('.nav-links a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9991bad4f0799aa2',t:'MTc2MjIzNDMzNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
